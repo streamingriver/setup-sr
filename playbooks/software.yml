@@ -1,0 +1,59 @@
+---
+- name: Setup required packages
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Install required packages
+    package:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - mariadb
+      - mariadb-server
+      - mariadb-libs
+      - php
+      - php-pdo
+      - php-mysql
+      - wget
+      - supervisor
+      - httpd
+
+  - name: Create tmp dir for the ffmpeg archive
+    file:
+      path: /tmp/ffmpeg/
+      state: directory
+    tags: ffmpeg
+
+  - name: Get and Extract ffmpeg archive
+    unarchive:
+      src: https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+      dest: /tmp/ffmpeg/
+      remote_src: yes
+    tags: ffmpeg
+
+  - name: Find ffmpeg file
+    find:
+      paths: "/tmp/ffmpeg"
+      recurse: yes
+      file_type: file
+      pattern: "ffmpeg"
+    register: ffmpeg_to_copy
+    tags: ffmpeg
+
+  - name: Create directory for ffmpeg
+    file:
+      path: /opt/tools/ffmpeg/
+      state: directory
+      recurse: yes
+    tags: ffmpeg
+
+  - name: Copy ffmpeg to the destination
+    copy:
+      src: "{{ item.path }}"
+      dest: /opt/tools/ffmpeg/ffmpeg
+      owner: root
+      mode: 0755
+    with_items: "{{ ffmpeg_to_copy.files }}"
+    tags: ffmpeg
+    

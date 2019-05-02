@@ -1,0 +1,8 @@
+---
+- name: Test ping on local machine
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Ping!
+    ping:
