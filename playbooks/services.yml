@@ -1,0 +1,16 @@
+---
+- name: Enable and restart services on the machine
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Enable and (re)start services
+    service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+    with_items:
+      - supervisord
+      - httpd
+      - mariadb
+    
