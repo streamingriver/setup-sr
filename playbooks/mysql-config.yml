@@ -29,8 +29,9 @@
   - name: Create SR Database
     mysql_db:
       name: "{{ sr_db_name }}"
-      state: present
+      state: import
       collation: utf8_general_ci
+      target: /var/www/sr/db.sql
 
   - name: Create SR User
     mysql_user:

@@ -59,3 +59,8 @@
     with_items: "{{ ffmpeg_to_copy.files }}"
     tags: ffmpeg
     
+
+  - name: Get SR release
+    git:
+      repo: 'https://github.com/streamingriver/vms.git'
+      dest: /var/www/sr 
