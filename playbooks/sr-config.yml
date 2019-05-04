@@ -1,0 +1,16 @@
+---
+- name: SR Configuration
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Make require dirs
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - /var/www/sr/_gen
+
+  - name: Make Fifo
+    shell: test -p /var/www/sr/_gen/streamingriver ||  mkfifo /var/www/sr/_gen/streamingriver
+
