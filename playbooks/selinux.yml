@@ -1,0 +1,37 @@
+---
+- name: Setups selinux permissions 
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+    seboolean:
+      name: "{{ item }}"
+      state: yes
+      persistent: yes
+    with_items:
+      - httpd_unified
+      - httpd_can_network_connect
+
+  - name: Restore context where required
+    shell: restorecon -R -v /var/www/sr/_gen/streamingriver
+
+  - name: Create security dir
+    file:
+      path: /opt/tools/security/
+      state: directory
+      recurse: yes
+
+  - name: Copy selinux module 
+    copy:
+      src: ../files/security/{{ item }}
+      dest: /opt/tools/security/{{ item }}
+      mode: 0755
+    with_items:
+      - sr.te
+      - build-install.sh
+    notify: build-install selinux module
+
+  handlers:
+  - name: build-install selinux module
+    shell: /opt/tools/security/build-install.sh
