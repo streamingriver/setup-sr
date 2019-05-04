@@ -1,0 +1,39 @@
+---
+- name: Setup MySQL
+  hosts: '{{ target | default("all") }}'
+  vars_files:
+    - /opt/tools/_etc/secrets
+
+  tasks:
+
+  - name: Config access only from localhost
+    template:
+      src: ../templates/mysql-local.cnf.j2
+      dest: /etc/my.cnf.d/local.cnf
+      mode: 0644
+      owner: root
+
+  - name: Config Root Password
+    mysql_user:
+      name: root
+      password: "{{ mysql_root_pw }}"
+      state: present
+
+  - name: Config my.cnf for root access
+    template:
+      src: "../templates/.my.cnf.j2"
+      dest: "/root/.my.cnf"
+      owner: root
+      mode: 0600
+
+  - name: Create SR Database
+    mysql_db:
+      name: "{{ sr_db_name }}"
+      state: present
+      collation: utf8_general_ci
+
+  - name: Create SR User
+    mysql_user:
+      name: "{{ sr_db_user }}"
+      password: "{{ sr_db_pass }}"
+      priv: "{{ sr_db_name }}.*:ALL"

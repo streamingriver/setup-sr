@@ -18,6 +18,8 @@
       - wget
       - supervisor
       - httpd
+      - python2-PyMySQL
+      - logrotate
 
   - name: Create tmp dir for the ffmpeg archive
     file:

@@ -1,14 +1,32 @@
 #!/bin/bash
 
-yum install epel-release -y --quiet
-yum install -y ansible --quiet
-yum install git-core -y --quiet
-
-echo "`hostname -s` ansible_connection=local" > /tmp/ansible_host_sr
+read -p "Enter the FQDN (full hostname.domain.ltd): " hostname
+read -p "Enter the IP address: " ip
 
 
-ansible-playbook -i /tmp/ansible_host_sr playbooks/software.yml 
-ansible-playbook -i /tmp/ansible_host_sr playbooks/httpd-config.yml
-ansible-playbook -i /tmp/ansible_host_sr playbooks/selinux.yml
-ansible-playbook -i /tmp/ansible_host_sr playbooks/services.yml 
+echo "${hostname} ansible_host=${ip} ansible_connection=local" > /opt/tools/_etc/ansible_host_sr
 
+yum install epel-release -y --quiet > /dev/null
+yum install -y ansible --quiet > /dev/null
+yum install git-core pwgen -y --quiet > /dev/null
+
+mkdir -p /opt/tools/_etc
+
+if [ ! -f /opt/tools/_etc/secrets ]; then
+    echo "mysql_root_pw: `pwgen 20`" > /opt/tools/_etc/secrets
+    echo "sr_db_user: sriptvdba" >> /opt/tools/_etc/secrets
+    echo "sr_db_pass: `pwgen 20`" >> /opt/tools/_etc/secrets
+    echo "sr_db_name: sriptvdb" >> /opt/tools/_etc/secrets
+    echo "sr_web_user: iptvadmin" >> /opt/tools/_etc/secrets
+    echo "sr_web_pass: `pwgen 20`" >> /opt/tools/_etc/secrets
+    chmod 600 /opt/tools/_etc/secrets
+fi
+
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/software.yml 
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/httpd-config.yml
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/mysql-config.yml
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/selinux.yml
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/services.yml 
+
+echo "go to http://${hostname} or http://${ip}/ and login with: "
+tail -n 2 /opt/tools/_etc/secrets
