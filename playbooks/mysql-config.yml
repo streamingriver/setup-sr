@@ -31,7 +31,9 @@
       name: "{{ sr_db_name }}"
       state: import
       collation: utf8_general_ci
-      target: /var/www/sr/db.sql
+      target: "{{ item }}"
+    with_fileglob:
+      - "/var/www/sr/migrations/*.sql"
 
   - name: Create SR User
     mysql_user:
