@@ -1,0 +1,13 @@
+---
+- name: Setup Vhosts
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Config Vhost
+    template:
+      src: "../templates/vhosts.conf.j2"
+      dest: "/etc/httpd/conf.d/vhosts.conf"
+      owner: root
+      mode: 0644
+    

@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+	SetENV CI_ENV production
+
+	DocumentRoot /var/www/sr/public_html
+	ServerName {{ ansible_hostname }}
+	<Directory "/var/www/sr/public_html">
+	    AllowOverride All
+	</Directory>
+
+	<IfModule mod_proxy.c>
+		ProxyRequests Off
+		ProxyPreserveHost On
+		ProxyPass /streams/ http://127.0.0.1:8000/
+		ProxyPassReverse /streams/ http://127.0.0.1:8000/
+	</IfModule>
+
+</VirtualHost>
