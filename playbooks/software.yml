@@ -21,6 +21,7 @@
       - python2-PyMySQL
       - logrotate
       - python-passlib.noarch
+      - pwgen
 
   - name: Create tmp dir for the ffmpeg archive
     file:
@@ -80,5 +81,5 @@
 
   - name: Get SR release
     git:
-      repo: 'git@github.com:streamingriver/vms.git'
+      repo: 'https://github.com/streamingriver/vms'
       dest: /var/www/sr 

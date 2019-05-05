@@ -3,6 +3,7 @@
 read -p "Enter the FQDN (full hostname.domain.ltd): " hostname
 read -p "Enter the IP address: " ip
 
+mkdir -p /opt/tools/_etc
 
 echo "${hostname} ansible_host=${ip} ansible_connection=local" > /opt/tools/_etc/ansible_host_sr
 
