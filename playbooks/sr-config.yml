@@ -1,6 +1,8 @@
 ---
 - name: SR Configuration
   hosts: '{{ target | default("all") }}'
+  vars_files:
+    - /opt/tools/_etc/secrets
 
   tasks:
 
@@ -8,9 +10,47 @@
     file:
       path: "{{ item }}"
       state: directory
+      mode: 0755
+      owner: apache
+      group: apache
     with_items:
       - /var/www/sr/_gen
 
   - name: Make Fifo
     shell: test -p /var/www/sr/_gen/streamingriver ||  mkfifo /var/www/sr/_gen/streamingriver
 
+  - name: Change Perms for Fifo
+    file:
+      path: /var/www/sr/_gen/streamingriver
+      owner: apache
+      group: root
+
+  - name: Config Database
+    template:
+      src: /var/www/sr/templates/database.php
+      dest: /var/www/sr/application/config/production/database.php
+
+  - name: Config SR app
+    template:
+      src: /var/www/sr/templates/config.php
+      dest: /var/www/sr/application/config/production/config.php
+
+  - name: Config Supervisor cmds
+    template:
+      src: ../templates/cmds.ini.j2
+      dest: "/etc/supervisord.d/cmds.ini"
+
+  - name: Config Supervisor StreamingRiver
+    template:
+      src: ../templates/streamserver.ini.j2
+      dest: "/etc/supervisord.d/streamserver.ini"
+
+
+  - name: Config SR Admin
+    htpasswd:
+      path: /var/www/.users
+      name: "{{ sr_web_user }}"
+      password: "{{ sr_web_pass }}"
+      owner: apache
+      group: root
+      mode: 0640

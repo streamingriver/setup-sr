@@ -20,6 +20,7 @@
       - httpd
       - python2-PyMySQL
       - logrotate
+      - python-passlib.noarch
 
   - name: Create tmp dir for the ffmpeg archive
     file:
@@ -58,9 +59,26 @@
       mode: 0755
     with_items: "{{ ffmpeg_to_copy.files }}"
     tags: ffmpeg
-    
+
+  - name: Copy other tools 
+    copy:
+      src: "../files/{{ item }}"
+      dest: "/opt/tools/{{ item }}"
+      owner: root
+      mode: 0755
+    with_items:
+      - up.py
+      - cmds.sh
+      - after.sh
+
+  - name: Get TS binary
+    get_url:
+      url: https://github.com/streamingriver/ts-server/releases/download/v0.1/ts-server_linux_amd64
+      dest: /opt/tools/ts-server_linux_amd64
+      mode: 0755
+      owner: root
 
   - name: Get SR release
     git:
-      repo: 'https://github.com/streamingriver/vms.git'
+      repo: 'git@github.com:streamingriver/vms.git'
       dest: /var/www/sr 

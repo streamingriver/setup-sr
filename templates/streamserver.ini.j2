@@ -1,0 +1,16 @@
+[program:streamsserver]
+directory=/tmp
+command=/opt/tools/stream_server -tokens http://localhost/apis/tokens?token=tes
+autostart = true
+startsec = 1
+user = root
+redirect_stderr = true
+stdout_logfile_maxbytes = 20MB
+stdoiut_logfile_backups = 20
+stdout_logfile = /var/log/supervisor/streamsserver.log
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stdout_events_enabled=true
+stderr_events_enabled=true
+startretries=5000000000

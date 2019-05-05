@@ -1,5 +1,5 @@
 
-module sr 1.4;
+module sr 1.8;
 
 require {
 	type httpd_t;
@@ -7,9 +7,13 @@ require {
         type soundd_port_t;
         class tcp_socket name_connect;
 	class fifo_file { open getattr write };
+        class dir { add_name write };
+        class file { write create };
 
 }
 
 #============= httpd_t ==============
 allow httpd_t httpd_sys_content_t:fifo_file { open getattr write };
 allow httpd_t soundd_port_t:tcp_socket name_connect;
+allow httpd_t httpd_sys_content_t:dir { add_name write };
+allow httpd_t httpd_sys_content_t:file { write create };
