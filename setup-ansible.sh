@@ -18,6 +18,7 @@ if [ ! -f /opt/tools/_etc/secrets ]; then
     echo "sr_db_user: sriptvdba" >> /opt/tools/_etc/secrets
     echo "sr_db_pass: `pwgen 20`" >> /opt/tools/_etc/secrets
     echo "sr_db_name: sriptvdb" >> /opt/tools/_etc/secrets
+    echo "sr_token: `pwgen 32`" >> /opt/tools/_etc/secrets
     echo "sr_web_user: iptvadmin" >> /opt/tools/_etc/secrets
     echo "sr_web_pass: `pwgen 20`" >> /opt/tools/_etc/secrets
     chmod 600 /opt/tools/_etc/secrets
@@ -30,5 +31,5 @@ ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/sr-config.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/selinux.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/services.yml 
 
-echo "go to http://${hostname} or http://${ip}/ and login with: "
+echo "go to http://${hostname}/site or http://${ip}/site and login with: "
 tail -n 2 /opt/tools/_etc/secrets
