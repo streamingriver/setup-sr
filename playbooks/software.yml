@@ -23,6 +23,16 @@
       - python-passlib.noarch
       - pwgen
 
+  - name: Enable and (re)start services
+    service:
+      name: "{{ item }}"
+      state: restarted
+      enabled: yes
+    with_items:
+      - supervisord
+      - httpd
+      - mariadb
+ 
   - name: Create tmp dir for the ffmpeg archive
     file:
       path: /tmp/ffmpeg/
