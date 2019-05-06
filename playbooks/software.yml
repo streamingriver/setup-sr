@@ -22,6 +22,7 @@
       - logrotate
       - python-passlib.noarch
       - pwgen
+      - policycoreutils-python
 
   - name: Enable and (re)start services
     service:
