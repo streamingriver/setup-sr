@@ -1,0 +1,21 @@
+---
+- name: Open Firewall if started
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+  - name: Check if firewalld is on (Errors are fine here)
+    command: /bin/systemctl -q is-enabled firewalld
+    ignore_errors: true
+    register: firewalld_status
+
+
+  - name: Open required ports
+    firewalld:
+      service: "{{ item }}"
+      permanent: yes
+      immediate: yes
+      state: enabled
+    with_items:
+      - http
+      - https
+    when: firewalld_status.rc == 0
