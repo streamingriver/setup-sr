@@ -6,7 +6,20 @@ fi
 
 while true
 do
-	cat $fifo_name
-        /opt/tools/up.py
-        /opt/tools/after.sh
+  clientcmd=$(cat $fifo_name)
+  IFS=" " read cmd param <<< $clientcmd
+
+  case $cmd in
+    "cmd1")
+      /opt/tools/up.py
+      /opt/tools/after.sh
+    ;;
+    "restart")
+      supervisorctl restart $param
+    ;;
+    *)
+      echo "uknown command"
+    ;;
+esac
+
 done
