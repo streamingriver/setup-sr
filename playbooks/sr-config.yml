@@ -19,9 +19,6 @@
   - name: Make Fifo
     shell: test -p /var/www/sr/_gen/streamingriver ||  mkfifo /var/www/sr/_gen/streamingriver
 
-  - name: Make Client config
-    shell: test -f /var/www/sr/application/config/production/client.php ||  touch /var/www/sr/application/config/production/client.php
-
   - name: Change Perms for Fifo
     file:
       path: /var/www/sr/_gen/streamingriver
@@ -37,6 +34,12 @@
     template:
       src: /var/www/sr/templates/config.php
       dest: /var/www/sr/application/config/production/config.php
+
+  - name: Config SR client config
+    template:
+      src: /var/www/sr/templates/client.php
+      dest: /var/www/sr/application/config/production/client.php
+      force: no
 
   - name: Config Supervisor cmds
     template:
