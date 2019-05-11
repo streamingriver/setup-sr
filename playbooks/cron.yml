@@ -1,0 +1,10 @@
+---
+- name: Setup crontab
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Install cron task
+    cron:
+      name: "clean ffmpeg trash"
+      job: "/opt/tools/cleantrash.sh"

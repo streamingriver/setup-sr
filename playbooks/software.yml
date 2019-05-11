@@ -82,6 +82,7 @@
       - up.py
       - cmds.sh
       - after.sh
+      - cleantrash.sh
 
   - name: Get TS binary
     get_url:
