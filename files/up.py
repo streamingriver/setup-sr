@@ -3,7 +3,7 @@
 lines = open("/var/www/sr/_gen/ffmpeg.txt","r")
 outputfile = open("/etc/supervisord.d/streams.ini", "w")
 
-rootpath = "/mnt/streams"
+rootpath = "/dev/shm"
 ffmpeg = "/opt/tools/ffmpeg/ffmpeg"
 
 tpl = """[program:{{name}}]
