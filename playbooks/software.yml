@@ -88,7 +88,7 @@
 
   - name: Get TS binary
     get_url:
-      url: https://github.com/streamingriver/ts-server/releases/download/v0.2/ts-server_linux_amd64
+      url: https://github.com/streamingriver/ts-server/releases/download/v0.3/ts-server_linux_amd64
       dest: /opt/tools/ts-server_linux_amd64
       mode: 0755
       owner: root
