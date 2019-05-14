@@ -23,6 +23,8 @@
       - python-passlib.noarch
       - pwgen
       - policycoreutils-python
+      - iftop
+      - iptraf-ng
 
   - name: Enable and (re)start services
     service:
