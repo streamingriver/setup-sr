@@ -1,4 +1,9 @@
 #!/bin/bash
+echo 
+echo 
+echo "###### ENTER YOUR SERVER INFORMATION ######"
+echo 
+echo 
 
 read -p "Enter the FQDN (full hostname.domain.ltd): " hostname
 read -p "Enter the IP address: " ip
