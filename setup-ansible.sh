@@ -38,5 +38,12 @@ ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/firewalld.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/services.yml 
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/cron.yml 
 
+echo 
+echo 
+echo "###### LOGIN INFORMATION ######"
+echo 
+echo 
 echo "go to http://${hostname}/site or http://${ip}/site and login with: "
 tail -n 2 /opt/tools/_etc/secrets
+echo 
+echo 
