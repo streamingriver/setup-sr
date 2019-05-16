@@ -26,5 +26,5 @@ stderr_events_enabled=true
 output = ""
 for line in lines:
 	parts = line.strip().split(" ")
-	output += tpl.replace("{{ffmpeg}}", ffmpeg).replace('{{rootpath}}',rootpath).replace('{{name}}', parts[0]).replace("{{ip}}", parts[1]).replace("{{snum}}","")
+	output += tpl.replace("{{ffmpeg}}", ffmpeg).replace('{{rootpath}}',rootpath).replace('{{name}}', parts[0]).replace("{{ip}}", parts[1].replace("%","%%")).replace("{{snum}}","")
 outputfile.write(output)
