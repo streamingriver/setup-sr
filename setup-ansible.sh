@@ -38,6 +38,8 @@ ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/firewalld.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/services.yml 
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/cron.yml 
 
+supervisorctl update
+
 echo 
 echo 
 echo "###### LOGIN INFORMATION ######"
