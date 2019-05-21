@@ -1,0 +1,29 @@
+---
+- name: Setup files and SR
+  hosts: '{{ target | default("all") }}'
+
+  tasks:
+
+  - name: Copy other tools 
+    copy:
+      src: "../files/{{ item }}"
+      dest: "/opt/tools/{{ item }}"
+      owner: root
+      mode: 0755
+    with_items:
+      - up.py
+      - cmds.sh
+      - after.sh
+      - cleantrash.sh
+
+  - name: Get TS server binary
+    get_url:
+      url: https://github.com/streamingriver/ts-server/releases/download/v0.3/ts-server_linux_amd64
+      dest: /opt/tools/ts-server_linux_amd64
+      mode: 0755
+      owner: root
+
+  - name: Get SR release
+    git:
+      repo: 'https://github.com/streamingriver/vms'
+      dest: /var/www/sr 

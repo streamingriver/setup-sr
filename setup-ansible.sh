@@ -30,9 +30,12 @@ if [ ! -f /opt/tools/_etc/secrets ]; then
 fi
 
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/software.yml 
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/files.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/httpd-config.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/mysql-config.yml
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/mysql-migrations.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/sr-config.yml
+ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/supervisord.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/selinux.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/firewalld.yml
 ansible-playbook -i /opt/tools/_etc/ansible_host_sr playbooks/services.yml 

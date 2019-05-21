@@ -1,0 +1,16 @@
+---
+- name: Setup MySQL
+  hosts: '{{ target | default("all") }}'
+  vars_files:
+    - /opt/tools/_etc/secrets
+
+  tasks:
+
+  - name: Create SR Database ( errors are fine here )
+    mysql_db:
+      name: "{{ sr_db_name }}"
+      state: import
+      collation: utf8_general_ci
+      target: "{{ item }}"
+    with_fileglob:
+      - "/var/www/sr/migrations/*.sql"

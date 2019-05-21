@@ -26,15 +26,6 @@
       owner: root
       mode: 0600
 
-  - name: Create SR Database
-    mysql_db:
-      name: "{{ sr_db_name }}"
-      state: import
-      collation: utf8_general_ci
-      target: "{{ item }}"
-    with_fileglob:
-      - "/var/www/sr/migrations/*.sql"
-
   - name: Create SR User
     mysql_user:
       name: "{{ sr_db_user }}"

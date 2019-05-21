@@ -41,16 +41,6 @@
       dest: /var/www/sr/application/config/production/client.php
       force: no
 
-  - name: Config Supervisor cmds
-    template:
-      src: ../templates/cmds.ini.j2
-      dest: "/etc/supervisord.d/cmds.ini"
-
-  - name: Config Supervisor StreamingRiver
-    template:
-      src: ../templates/streamserver.ini.j2
-      dest: "/etc/supervisord.d/streamserver.ini"
-
 
   - name: Config SR Admin
     htpasswd:

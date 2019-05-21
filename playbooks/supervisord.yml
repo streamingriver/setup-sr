@@ -1,0 +1,17 @@
+---
+- name: SR Configuration
+  hosts: '{{ target | default("all") }}'
+  vars_files:
+    - /opt/tools/_etc/secrets
+
+  tasks:
+
+  - name: Config Supervisor cmds
+    template:
+      src: ../templates/cmds.ini.j2
+      dest: "/etc/supervisord.d/cmds.ini"
+
+  - name: Config Supervisor StreamingRiver
+    template:
+      src: ../templates/streamserver.ini.j2
+      dest: "/etc/supervisord.d/streamserver.ini"
