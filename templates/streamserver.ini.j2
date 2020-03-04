@@ -1,6 +1,6 @@
 [program:streamsserver]
 directory=/tmp
-command=/opt/tools/ts-server_linux_amd64 -root /dev/shm -tokens http://localhost/apis/tokens?token={{ sr_token }} -v2
+command=/opt/tools/ts-server_linux_amd64 -root /dev/shm -tokens http://localhost/apis/tokens?token={{ sr_token }} -v2 --backend http://localhost:8085
 autostart = true
 startsec = 1
 user = root
