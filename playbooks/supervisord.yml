@@ -19,4 +19,4 @@
   - name: Config Supervisor Frontend
   template:
     src: ../templates/frontend.ini.j2
-    dest: "/etc/supervisord.d/streamserver.ini"
+    dest: "/etc/supervisord.d/frontend.ini"
