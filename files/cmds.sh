@@ -14,6 +14,10 @@ do
       /opt/tools/up.py
       /opt/tools/after.sh
     ;;
+    "cmd2")
+      /opt/tools/up2.py
+      /opt/tools/after.sh
+    ;;
     "restart")
       supervisorctl restart $param
     ;;
