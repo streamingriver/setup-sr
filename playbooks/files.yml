@@ -12,6 +12,7 @@
       mode: 0755
     with_items:
       - up.py
+      - up2.py
       - cmds.sh
       - after.sh
       - cleantrash.sh
