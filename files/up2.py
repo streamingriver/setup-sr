@@ -4,7 +4,7 @@ lines = open("/var/www/sr/_gen/ffmpeg.txt","r")
 outputfile = open("/etc/supervisord.d/proxies.ini", "w")
 
 tpl = """[program:proxy-{{name}}]
-command=/opt/tools/hls-proxy_linux_amd64 --url "{{ip}} --name "{{name}}" --frontend http://127.0.0.1:8085
+command=/opt/tools/hls-proxy_linux_amd64 --url "{{ip}}" --name "{{name}}" --frontend http://127.0.0.1:8085
 autostart = true
 startsec = 1
 user = root
