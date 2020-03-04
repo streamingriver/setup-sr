@@ -24,18 +24,18 @@
       owner: root
 
   - name: Get hls-proxy server binary
-  get_url:
-    url: https://github.com/streamingriver/go-hls-proxy/releases/download/v0.1/hls-proxy_linux_amd64
-    dest: /opt/tools/hls-proxy_linux_amd64
-    mode: 0755
-    owner: root
+    get_url:
+      url: https://github.com/streamingriver/go-hls-proxy/releases/download/v0.1/hls-proxy_linux_amd64
+      dest: /opt/tools/hls-proxy_linux_amd64
+      mode: 0755
+      owner: root
 
   - name: Get registry server binary
-  get_url:
-    url: https://github.com/streamingriver/go-frontend/releases/download/v0.1/frontend_linux_amd64
-    dest: /opt/tools/frontend_linux_amd64
-    mode: 0755
-    owner: root
+    get_url:
+      url: https://github.com/streamingriver/go-frontend/releases/download/v0.1/frontend_linux_amd64
+      dest: /opt/tools/frontend_linux_amd64
+      mode: 0755
+      owner: root
 
   - name: Get SR release
     git:
