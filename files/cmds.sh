@@ -15,6 +15,7 @@ do
       /opt/tools/after.sh
     ;;
     "cmd2")
+      /opt/tools/up.py
       /opt/tools/up2.py
       /opt/tools/after.sh
     ;;
