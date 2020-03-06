@@ -20,3 +20,8 @@
     template:
       src: ../templates/frontend.ini.j2
       dest: "/etc/supervisord.d/frontend.ini"
+
+  - name: Config Supervisor FileServer
+    template:
+      src: ../templates/fileserver.ini.j2
+      dest: "/etc/supervisord.d/fileserver.ini"
