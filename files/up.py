@@ -7,7 +7,7 @@ rootpath = "/dev/shm"
 ffmpeg = "/opt/tools/ffmpeg/ffmpeg"
 
 tpl = """[program:{{name}}]
-command=/bin/bash -c "mkdir -p {{rootpath}}/{{name}}; cd {{rootpath}}/{{name}}; {{ffmpeg}} -xerror -nostats -nostdin -i "{{ip}}" -codec copy -map 0:0 -map 0:1 -map_metadata 0 {{snum}} -f hls -hls_list_size 3 -hls_flags delete_segments -hls_time 5 -segment_list_size 3 -hls_segment_filename file%%07d.ts stream.m3u8"
+command=/bin/bash -c "mkdir -p {{rootpath}}/{{name}}; cd {{rootpath}}/{{name}}; {{ffmpeg}} -xerror -nostats -nostdin -user-agent "streamingriveriptv/1.0" -i "{{ip}}" -codec copy -map 0:0 -map 0:1 -map_metadata 0 {{snum}} -f hls -hls_list_size 3 -hls_flags delete_segments -hls_time 5 -segment_list_size 3 -hls_segment_filename file%%07d.ts stream.m3u8"
 autostart = true
 startsec = 1
 user = root
