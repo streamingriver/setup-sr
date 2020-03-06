@@ -23,20 +23,23 @@
       dest: /opt/tools/ts-server_linux_amd64
       mode: 0755
       owner: root
+      force: yes
 
   - name: Get hls-proxy server binary
     get_url:
-      url: https://github.com/streamingriver/go-hls-proxy/releases/download/v0.2/hls-proxy_linux_amd64
+      url: https://github.com/streamingriver/go-hls-proxy/releases/download/v0.3/hls-proxy_linux_amd64
       dest: /opt/tools/hls-proxy_linux_amd64
       mode: 0755
       owner: root
+      force: yes
 
   - name: Get registry server binary
     get_url:
-      url: https://github.com/streamingriver/go-frontend/releases/download/v0.3/frontend_linux_amd64
+      url: https://github.com/streamingriver/go-frontend/releases/download/v0.4/frontend_linux_amd64
       dest: /opt/tools/frontend_linux_amd64
       mode: 0755
       owner: root
+      force: yes
 
   - name: Get files server binary
     get_url:
