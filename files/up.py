@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-lines = open("/var/www/sr/_gen/ffmpeg2.txt","r")
+lines = open("/var/www/sr/_gen/ffmpeg.txt","r")
 outputfile = open("/etc/supervisord.d/streams.ini", "w")
 
 rootpath = "/dev/shm"

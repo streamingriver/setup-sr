@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-lines = open("/var/www/sr/_gen/ffmpeg.txt","r")
+lines = open("/var/www/sr/_gen/ffmpeg2.txt","r")
 outputfile = open("/etc/supervisord.d/proxies.ini", "w")
 
 tpl = """[program:proxy-{{name}}]
